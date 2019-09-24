@@ -1,0 +1,34 @@
+---
+title: "Class 2019-09-24"
+author: "Mengxi Tan"
+date: "9/24/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+  library(tidyverse)
+  library(dplyr)
+  library(readxl)
+  library(janitor)
+  
+  class_enrollment <-read_xlsx("class_enrollment_summary_by_term_9.17.19.xlsx", skip = 3,na = c("", "NA"), trim_ws = TRUE) %>%
+  clean_names() %>%
+  filter (!is.na(course_id))%>%
+  filter(!is.na(course_name))
+```
+
+```{r cars}
+  max_undergrad_gov <- class_enrollment %>% arrange(desc(u_grad)) %>% filter(course_department == "Government")
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
